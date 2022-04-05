@@ -35,4 +35,20 @@ interface Expected2 {
 ```
 [查看解答](https://github.com/leno23/ts-challenges/blob/main/challenges/pick/template.ts)
 
+### Day03 readonly
+实现一个MyPick类型，可以从接口中抽取部分key组成新的接口
+```typescript
+type cases = [Expect<Equal<MyReadonly<Todo1>, Readonly<Todo1>>>];
+
+interface Todo1 {
+  title: string;
+  description: string;
+  completed: boolean;
+  meta: {
+    author: string;
+  };
+}
+```
+[查看解答](https://github.com/leno23/ts-challenges/blob/main/challenges/readonly/template.ts)
+
 > 附：[ts类型体操仓库](https://github.com/type-challenges/type-challenges)
