@@ -8,6 +8,7 @@ type cases = [Expect<NotAny<HelloWorld>>, Expect<Equal<HelloWorld, string>>];
 ```
 [查看解答](https://github.com/leno23/ts-challenges/blob/main/challenges/hello-world/template.ts)
 
+---
 
 ### Day02 Pick
 实现一个MyPick类型，可以从接口中抽取部分key组成新的接口
@@ -35,8 +36,11 @@ interface Expected2 {
 ```
 [查看解答](https://github.com/leno23/ts-challenges/blob/main/challenges/pick/template.ts)
 
-### Day03 readonly
-实现一个MyPick类型，可以从接口中抽取部分key组成新的接口
+---
+### Day03 
+#### readonly
+实现一个MyReadonly类型，设置接口中所有字段只读
+
 ```typescript
 type cases = [Expect<Equal<MyReadonly<Todo1>, Readonly<Todo1>>>];
 
@@ -51,4 +55,41 @@ interface Todo1 {
 ```
 [查看解答](https://github.com/leno23/ts-challenges/blob/main/challenges/readonly/template.ts)
 
+#### tuple-to-object
+
+实现一个TupleToObject类型，遍历元组中所有key生成对象，value也为key
+```typescript
+const tuple = ['tesla', 'model 3', 'model X', 'model Y'] as const
+
+type cases = [
+  Expect<Equal<TupleToObject<typeof tuple>, { tesla: 'tesla'; 'model 3': 'model 3'; 'model X': 'model X'; 'model Y': 'model Y'}>>,
+]
+
+// @ts-expect-error
+type error = TupleToObject<[[1, 2], {}]>
+```
+[查看解答](https://github.com/leno23/ts-challenges/blob/main/challenges/easy-first/template.ts)
+
+#### first of array
+
+实现一个First类型，获取数组中的第一个元素
+```typescript
+type cases = [
+    Expect<Equal<First<[3, 2, 1]>, 3>>,
+    Expect<Equal<First<[() => 123, { a: string }]>, () => 123>>,
+    Expect<Equal<First<[]>, never>>,
+    Expect<Equal<First<[undefined]>, undefined>>
+]
+
+type errors = [
+    // @ts-expect-error
+    First<'notArray'>,
+    // @ts-expect-error
+    First<{ 0: 'arrayLike' }>,
+]
+```
+[查看解答](https://github.com/leno23/ts-challenges/blob/main/challenges/easy-first/template.ts)
+
 > 附：[ts类型体操仓库](https://github.com/type-challenges/type-challenges)
+
+---
