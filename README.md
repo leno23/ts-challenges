@@ -90,6 +90,70 @@ type errors = [
 ```
 [查看解答](https://github.com/leno23/ts-challenges/blob/main/challenges/easy-first/template.ts)
 
+---
+
+### Day04
+#### length-of-tuple
+
+返回元组的最后一个元素
+```typescript
+import { Equal, Expect } from '@type-challenges/utils'
+
+const tesla = ['tesla', 'model 3', 'model X', 'model Y'] as const
+const spaceX = ['FALCON 9', 'FALCON HEAVY', 'DRAGON', 'STARSHIP', 'HUMAN SPACEFLIGHT'] as const
+
+
+type cases = [
+  Expect<Equal<Length<typeof tesla>, 4>>,
+  Expect<Equal<Length<typeof spaceX>, 5>>,
+  // @ts-expect-error
+  Length<5>,
+  // @ts-expect-error
+  Length<'hello world'>,
+]
+```
+[查看解答](https://github.com/leno23/ts-challenges/blob/main/challenges/length-of-tuple/template.ts)
+
+#### exclude
+
+返回元组的最后一个元素
+```typescript
+import { Equal, Expect } from '@type-challenges/utils'
+
+type cases = [
+    Expect<Equal<MyExclude<"a" | "b" | "c", "a">, Exclude<"a" | "b" | "c", "a">>>,
+    Expect<Equal<MyExclude<"a" | "b" | "c", "a" | "b">, Exclude<"a" | "b" | "c", "a" | "b">>>,
+    Expect<Equal<MyExclude<string | number | (() => void), Function>, Exclude<string | number | (() => void), Function>>>,
+]
+```
+[查看解答](https://github.com/leno23/ts-challenges/blob/main/challenges/exclude/template.ts)
+
+#### easy-if
+
+声明一个类型,传入三个类型,第一个为boolean类型,结果为后两个类型是否相同
+```typescript
+import { Equal, Expect } from "@type-challenges/utils";
+// 使用 extends undefined 来判断传入类型为null
+type If<C, T, F> = C extends undefined ? error : C extends true ? T : F;
+type cases = [
+    Expect<Equal<If<true, "a", "b">, "a">>,
+    Expect<Equal<If<false, "a", 2>, 2>>
+];
+// @ts-expect-error
+type error = If<null, "a", "b">;
+
+```
+[查看解答](https://github.com/leno23/ts-challenges/blob/main/challenges/eay-if/template.ts)
+
+#### easy-await
+
+声明一个类型，用来判断传入的是Promise类型
+```typescript
+    Expect<Equal<MyAwaited<Z>, string | number>>
+
+```
+[查看解答](https://github.com/leno23/ts-challenges/blob/main/challenges/easy-await/template.ts)
+
 > 附：[ts类型体操仓库](https://github.com/type-challenges/type-challenges)
 
 ---
