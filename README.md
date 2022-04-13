@@ -157,3 +157,80 @@ type error = If<null, "a", "b">;
 > 附：[ts类型体操仓库](https://github.com/type-challenges/type-challenges)
 
 ---
+
+### Day05
+#### easy-push
+
+向数组尾部添加一个元素
+```typescript
+import { Equal, Expect, ExpectFalse, NotEqual } from '@type-challenges/utils'
+type Push<T extends any[],U> = [...T,U]
+
+type cases = [
+  Expect<Equal<Push<[], 1>, [1]>>,
+  Expect<Equal<Push<[1, 2], '3'>, [1, 2, '3']>>,
+  Expect<Equal<Push<['1', 2, '3'], boolean>, ['1', 2, '3', boolean]>>,
+]
+```
+[查看解答](https://github.com/leno23/ts-challenges/blob/main/challenges/easy-push/template.ts)
+
+#### easy-concat
+
+连接两个数组
+```typescript
+import { Equal, Expect } from '@type-challenges/utils'
+type Concat<T extends any[],U extends any[]> = [...T,...U] 
+type cases = [
+  Expect<Equal<Concat<[], []>, []>>,
+  Expect<Equal<Concat<[], [1]>, [1]>>,
+  Expect<Equal<Concat<[1, 2], [3, 4]>, [1, 2, 3, 4]>>,
+  Expect<Equal<Concat<['1', 2, '3'], [false, boolean, '4']>, ['1', 2, '3', false, boolean, '4']>>,
+]
+```
+[查看解答](https://github.com/leno23/ts-challenges/blob/main/challenges/easy-concat/template.ts)
+
+#### easy-unshift
+
+向一个数组头部添加一个元素
+```typescript
+import { Equal, Expect, ExpectFalse, NotEqual } from '@type-challenges/utils'
+
+type Unshift<T extends any[],U> = [U,...T]
+type cases = [
+  Expect<Equal<Unshift<[], 1>, [1]>>,
+  Expect<Equal<Unshift<[1, 2], 0>, [0, 1, 2,]>>,
+  Expect<Equal<Unshift<['1', 2, '3'],boolean>, [boolean, '1', 2, '3']>>,
+]
+```
+[查看解答](https://github.com/leno23/ts-challenges/blob/main/challenges/asy-unshift/template.ts)
+
+
+#### easy-parameters
+
+返回函数类型的参数类型序列
+```typescript
+import { Equal, Expect, ExpectFalse, NotEqual } from '@type-challenges/utils'
+
+const foo = (arg1: string, arg2: number): void => {}
+const bar = (arg1: boolean, arg2: {a: 'A'}): void => {}
+const baz = (): void => {}
+
+type cases = [
+  Expect<Equal<MyParameters<typeof foo>, [string, number]>>,
+  Expect<Equal<MyParameters<typeof bar>, [boolean, {a: 'A'}]>>,
+  Expect<Equal<MyParameters<typeof baz>, []>>,
+]
+```
+[查看解答](https://github.com/leno23/ts-challenges/blob/main/challenges/easy-parameters/template.ts)
+
+#### medium-last
+
+返回元组的最后一个元素
+```typescript
+import { Equal, Expect } from '@type-challenges/utils'
+type cases = [
+  Expect<Equal<Last<[3, 2, 1]>, 1>>,
+  Expect<Equal<Last<[() => 123, { a: string }]>, { a: string }>>,
+]
+```
+[查看解答](https://github.com/leno23/ts-challenges/blob/main/challenges/medium-last/template.ts)
