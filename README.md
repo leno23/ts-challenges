@@ -154,7 +154,6 @@ type error = If<null, "a", "b">;
 ```
 [查看解答](https://github.com/leno23/ts-challenges/blob/main/challenges/easy-await/template.ts)
 
-> 附：[ts类型体操仓库](https://github.com/type-challenges/type-challenges)
 
 ---
 
@@ -234,3 +233,151 @@ type cases = [
 ]
 ```
 [查看解答](https://github.com/leno23/ts-challenges/blob/main/challenges/medium-last/template.ts)
+
+### DAY06
+
+#### medium-chainable-options
+
+支持链式操作的类型
+```typescript
+import { Equal, Expect } from '@type-challenges/utils'
+type cases = [
+  Expect<Equal<Last<[3, 2, 1]>, 1>>,
+  Expect<Equal<Last<[() => 123, { a: string }]>, { a: string }>>,
+]
+```
+[查看解答](https://github.com/leno23/ts-challenges/blob/main/challenges/medium-chainable-options/template.ts)
+
+#### medium-deep-readonly
+
+对一个对象深度可读
+```typescript
+import { Equal, Expect } from "@type-challenges/utils";
+
+type cases = [Expect<Equal<DeepReadonly<X>, Expected>>];
+
+type X = {
+    a: () => 22;
+    b: string;
+    c: {
+        d: boolean;
+        e: {
+            g: {
+                h: {
+                    i: true;
+                    j: "string";
+                };
+                k: "hello";
+            };
+            l: [
+                "hi",
+                {
+                    m: ["hey"];
+                }
+            ];
+        };
+    };
+};
+
+type Expected = {
+    readonly a: () => 22;
+    readonly b: string;
+    readonly c: {
+        readonly d: boolean;
+        readonly e: {
+            readonly g: {
+                readonly h: {
+                    readonly i: true;
+                    readonly j: "string";
+                };
+                readonly k: "hello";
+            };
+            readonly l: readonly [
+                "hi",
+                {
+                    readonly m: readonly ["hey"];
+                }
+            ];
+        };
+    };
+};
+
+```
+[查看解答](https://github.com/leno23/ts-challenges/blob/main/challenges/medium-deep-readonly/template.ts)
+
+#### medium-readonly-2
+
+指定对象中部分属性可读
+```typescript
+import { Alike, Expect } from '@type-challenges/utils'
+
+type cases = [
+  Expect<Alike<MyReadonly2<Todo1>, Readonly<Todo1>>>,
+  Expect<Alike<MyReadonly2<Todo1, 'title' | 'description'>, Expected>>,
+  Expect<Alike<MyReadonly2<Todo2, 'title' | 'description'>, Expected>>,
+]
+
+interface Todo1 {
+  title: string
+  description?: string
+  completed: boolean
+}
+
+interface Todo2 {
+  readonly title: string
+  description?: string
+  completed: boolean
+}
+
+interface Expected {
+  readonly title: string
+  readonly description?: string
+  completed: boolean
+}
+```
+[查看解答](https://github.com/leno23/ts-challenges/blob/main/challenges/medium-readonly-2/template.ts)
+#### medium-omit
+
+去掉接口中部分字段组成新接口
+```typescript
+import { Equal, Expect } from '@type-challenges/utils'
+
+type cases = [
+  Expect<Equal<Expected1, MyOmit<Todo, 'description'>>>,
+  Expect<Equal<Expected2, MyOmit<Todo, 'description' | 'completed'>>>
+]
+
+// @ts-expect-error
+type error = MyOmit<Todo, 'description' | 'invalid'>
+
+interface Todo {
+  title: string
+  description: string
+  completed: boolean
+}
+
+interface Expected1 {
+  title: string
+  completed: boolean
+}
+
+interface Expected2 {
+  title: string
+}
+```
+[查看解答](https://github.com/leno23/ts-challenges/blob/main/challenges/medium-omit/template.ts)
+#### medium-pop
+
+去除数组中的最后一个元素
+```typescript
+import { Equal, Expect } from '@type-challenges/utils'
+
+type cases = [
+  Expect<Equal<Pop<[3, 2, 1]>, [3, 2]>>,
+  Expect<Equal<Pop<['a', 'b', 'c', 'd', ]>, ['a', 'b', 'c']>>,
+]
+```
+[查看解答](https://github.com/leno23/ts-challenges/blob/main/challenges/medium-pop/template.ts)
+
+---
+> 附：[ts类型体操仓库](https://github.com/type-challenges/type-challenges)
