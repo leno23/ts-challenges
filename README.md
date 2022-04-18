@@ -379,5 +379,24 @@ type cases = [
 ```
 [查看解答](https://github.com/leno23/ts-challenges/blob/main/challenges/medium-pop/template.ts)
 
+### DAY07
+#### promiseAll
+
+实现promise.all类型
+```typescript
+import type { Equal, Expect } from '@type-challenges/utils'
+
+const promiseAllTest1 = PromiseAll([1, 2, 3] as const)
+const promiseAllTest2 = PromiseAll([1, 2, Promise.resolve(3)] as const)
+const promiseAllTest3 = PromiseAll([1, 2, Promise.resolve(3)])
+
+type cases = [
+  Expect<Equal<typeof promiseAllTest1, Promise<[1, 2, 3]>>>,
+  Expect<Equal<typeof promiseAllTest2, Promise<[1, 2, number]>>>,
+  Expect<Equal<typeof promiseAllTest3, Promise<[number, number, number]>>>,
+]
+```
+[查看解答](https://github.com/leno23/ts-challenges/blob/main/challenges/medium-promise-all/template.ts)
+
 ---
 > 附：[ts类型体操仓库](https://github.com/type-challenges/type-challenges)
